@@ -1,14 +1,6 @@
----
-    title: "Reproducible Research: Peer Assessment 1"
-    output: 
-    html_document:
-    keep_md: true
----
-
-
+    
 ## Loading and preprocessing the data
 
-```{R}
     #Reading and confirming data
     zipfile <- "activity.zip"
     filename <- "activity.csv"
@@ -35,11 +27,10 @@
     library(lubridate)
     arquivo <- cbind(arquivo, ymd(arquivo[,2]))
     colnames(arquivo) <- c("steps", "date", "interval", "newDate")
-``` 
+    
 
 ## What is mean total number of steps taken per day?
-
-```{R}
+    
     #Calculate the total number of steps taken per day
 
     tnspd <- aggregate(steps ~ newDate,
@@ -63,12 +54,10 @@
     
     mdPD <- round(median(tnspd$steps),digits = 2)
     print(paste("Median: ", mdPD))
+ 
 
-``` 
-    
 ## What is the average daily activity pattern?
 
-```{R}
     #Make a time series plot (i.e. type = "l") of 
     #the 5-minute interval (x-axis) and the average 
     #number of steps taken, averaged across all 
@@ -93,12 +82,10 @@
     
     print(paste("Max number steps by interval:", intavg[maxstepsIndex,]$interval))
     
-``` 
-
+    
 ## Imputing missing values
-
-```{R}
-#Calculate and report the total number of 
+    
+    #Calculate and report the total number of 
     #missing values in the dataset (i.e. the total 
     #number of rows with NA)
 
@@ -157,13 +144,12 @@
     print("The values: Differences By Median")
     print(paste("Not NA fill:", mdPD))
     print(paste("With NA fill:", mdPD2))
-``` 
+    
+    
+##Are there differences in activity patterns between weekdays 
+##and weekends?
 
-
-## Are there differences in activity patterns between weekdays and weekends?
-
-```{R}
-  #Create a new factor variable in the dataset with two 
+    #Create a new factor variable in the dataset with two 
     #levels – “weekday” and “weekend” indicating whether a 
     #given date is a weekday or weekend day.
     
@@ -189,4 +175,7 @@
     ggplot(meandataweekendweekday, aes(x=interval, y=steps, color=weekend)) + geom_line() + facet_grid(weekend ~.) + xlab("Interval") + ylab("Mean of Steps") + ggtitle("Comparison of Average Number of Steps in Each Interval")
     
     
-``` 
+    
+    
+    
+    
